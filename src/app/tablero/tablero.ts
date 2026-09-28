@@ -1,5 +1,6 @@
 import { Component, computed, signal } from '@angular/core';
 
+type Rango = 'agotado' | 'bajo' | 'disponible';
 
 interface Producto {
   nombre: string;
@@ -11,6 +12,12 @@ interface Producto {
 @Component({
   selector: 'app-tablero',
   templateUrl: './tablero.html',
+  styles: `
+    .etq { border-radius: 999px; padding: .1rem .6rem; font-size: .72rem; font-weight: 700; }
+    .verde { background: #d1fae5; color: #065f46; }
+    .amarillo { background: #fef3c7; color: #92400e; }
+    .rojo  { background: #fee2e2; color: #991b1b; }
+  `,
 })
 export class Tablero {
   
@@ -66,8 +73,14 @@ productoCaro = computed(() =>
       const ctg = categoria === "Todas" || p.categoria === categoria;
 
       return fil && ctg;
-    });
+    }).map((p) => ({...p, estado: this.estadosDe(p.cantidad)}));
   });
+
+  private estadosDe(cantidad: number): Rango {
+    if (cantidad == 0) return 'agotado';
+    return  cantidad >= 3 ? 'disponible' : 'bajo';
+
+  }
 
   
   vender(nombre: string) {

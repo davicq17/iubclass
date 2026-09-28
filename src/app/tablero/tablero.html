@@ -46,6 +46,7 @@
         <th class="px-4 py-3">Categoria</th>
         <th class="px-4 py-3">Precio</th>
         <th class="px-4 py-3">Cantidad</th>
+        <th class="px-4 py-3">Estado</th>
         <th class="px-4 py-3">Subtotal</th>
         <th class="px-4 py-3">Acciones</th>
       </tr>
@@ -60,6 +61,14 @@
           <td class="px-4 py-3 text-slate-600">{{ p.categoria }}</td>
           <td class="px-4 py-3 text-slate-600">{{ p.precio }}</td>
           <td class="px-4 py-3 text-slate-600">{{ p.cantidad }}</td>
+
+          <td class="px-4 py-3 text-slate-600">
+            @switch (p.estado) {
+              @case('disponible') {<span class="etq verde">Disponible</span>}
+              @case('bajo')       {<span class="etq amarillo">Bajo</span>}
+              @default            {<span class="etq rojo">Agotado</span>}
+            }
+          </td>
         
           <td class="px-4 py-3 font-semibold text-slate-900">
             {{ p.precio * p.cantidad }}
