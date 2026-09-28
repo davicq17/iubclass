@@ -3,6 +3,7 @@ import { Component, computed, signal } from '@angular/core';
 
 interface Producto {
   nombre: string;
+  categoria: String;
   precio: number;
   cantidad: number;
 }
@@ -16,13 +17,15 @@ export class Tablero {
   vendedor = signal('Don Efraín');
 
   filtro = signal('');
+  categoria = signal("Todas");
 
   productos = signal<Producto[]>([
-    { nombre: 'Mango', precio: 1800, cantidad: 12 },
-    { nombre: 'Guayaba', precio: 1200, cantidad: 8 },
-    { nombre: 'Patilla', precio: 6500, cantidad: 2 },
-    { nombre: 'Maracuyá', precio: 3400, cantidad: 5 },
-    { nombre: 'Níspero', precio: 2900, cantidad: 4 },
+    { nombre: 'Mango', categoria:'Frutas', precio: 1800, cantidad: 12 },
+    { nombre: 'Guayaba', categoria:'Frutas', precio: 1200, cantidad: 0 },
+    { nombre: 'Patilla', categoria:'Frutas', precio: 6500, cantidad: 2 },
+    { nombre: 'Tomate', categoria:'Verduras', precio: 3200, cantidad: 9 },
+    { nombre: 'Cebolla', categoria:'Verduras', precio: 2800, cantidad: 1 },
+    { nombre: 'Ahuyama', categoria:'Verduras', precio: 4500, cantidad: 0 },
   ]);
 
 
@@ -57,8 +60,13 @@ productoCaro = computed(() =>
   
   visibles = computed(() => {
     const texto = this.filtro().toLowerCase().trim();
-    if (texto === '') return this.ordenados();
-    return this.ordenados().filter((p) => p.nombre.toLowerCase().includes(texto));
+    const categoria = this.categoria();
+    return this.ordenados().filter((p) => { 
+      const fil = p.nombre.toLowerCase().includes(texto);
+      const ctg = categoria === "Todas" || p.categoria === categoria;
+
+      return fil && ctg;
+    });
   });
 
   

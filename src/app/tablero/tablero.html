@@ -22,6 +22,20 @@
     Limpiar
   </button>
 </div>
+<div class="flex flex-wrap gap-2">
+      <button type="button" 
+      class="ml-1 mt-6 rounded-md bg-slate-800 px-3 py-1 text-xs font-bold text-white" 
+      (click)="categoria.set('Todas')">Todas</button>
+      <button type="button" 
+      class="ml-1 mt-6 rounded-md bg-slate-800 px-3 py-1 text-xs font-bold text-white" 
+      (click)="categoria.set('Frutas')">Frutas</button>
+      <button type="button" 
+      class="ml-1 mt-6 rounded-md bg-slate-800 px-3 py-1 text-xs font-bold text-white" 
+      (click)="categoria.set('Verduras')">Verduras</button>
+      <button type="button" 
+      class="ml-1 mt-6 rounded-md bg-slate-800 px-3 py-1 text-xs font-bold text-white" 
+      (click)="categoria.set('Granos')">Granos</button>
+</div>
 
 
 <div class="mt-4 overflow-x-auto rounded-xl border border-slate-200">
@@ -29,6 +43,7 @@
     <thead class="bg-slate-900 text-xs uppercase tracking-wider text-white">
       <tr>
         <th class="px-4 py-3">Producto</th>
+        <th class="px-4 py-3">Categoria</th>
         <th class="px-4 py-3">Precio</th>
         <th class="px-4 py-3">Cantidad</th>
         <th class="px-4 py-3">Subtotal</th>
@@ -42,6 +57,7 @@
           [class.opacity-40]="p.cantidad === 0"
         >
           <td class="px-4 py-3 font-semibold text-slate-900">{{ p.nombre }}</td>
+          <td class="px-4 py-3 text-slate-600">{{ p.categoria }}</td>
           <td class="px-4 py-3 text-slate-600">{{ p.precio }}</td>
           <td class="px-4 py-3 text-slate-600">{{ p.cantidad }}</td>
         
@@ -77,7 +93,7 @@
       } @empty {
         <tr>
           <td colspan="5" class="px-4 py-8 text-center text-slate-400">
-            Ningún producto coincide con «{{ filtro() }}»
+            No hay productos es esta categoria
           </td>
         </tr>
       }
