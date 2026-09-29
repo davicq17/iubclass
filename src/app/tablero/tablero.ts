@@ -1,4 +1,6 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, LOCALE_ID } from '@angular/core';
+import { CurrencyPipe, DatePipe, registerLocaleData } from '@angular/common';
+import { StockPipe } from './stock-pipe';
 
 type Rango = 'agotado' | 'bajo' | 'disponible';
 
@@ -11,17 +13,20 @@ interface Producto {
 
 @Component({
   selector: 'app-tablero',
+  imports: [CurrencyPipe, DatePipe, StockPipe],
   templateUrl: './tablero.html',
   styles: `
     .etq { border-radius: 999px; padding: .1rem .6rem; font-size: .72rem; font-weight: 700; }
     .verde { background: #d1fae5; color: #065f46; }
     .amarillo { background: #fef3c7; color: #92400e; }
     .rojo  { background: #fee2e2; color: #991b1b; }
+    .agotado { background: #ffebee; }
   `,
 })
 export class Tablero {
   
   vendedor = signal('Don Efraín');
+  hoy = new Date()
 
   filtro = signal('');
   categoria = signal("Todas");
