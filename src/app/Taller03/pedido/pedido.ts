@@ -1,5 +1,5 @@
 import { TarjetaProducto } from '../tarjeta-producto/tarjeta-producto';
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ResumenPedido } from '../resumen-pedido/resumen-pedido';
 import { Producto } from '../producto';
@@ -45,5 +45,19 @@ export class Pedido {
         return [...lista, {nombre:nombre, precio: producto?.precio ||0 , cantidad: 1 }]
       }
     }); 
+  }
+
+  quitarLinea(nombre: string){
+
+    const stock =  this.pedido().find((item) => item.nombre === nombre);
+
+    this.productos.update((lista) =>
+      lista.map((p) =>
+        p.nombre === nombre ? {...p, existencias: p.existencias +Number(stock?.cantidad) } : p
+      ),
+    );
+    this.pedido.update((lista) =>
+      lista.filter((l) => l.nombre !== nombre),
+    );
   }
 }

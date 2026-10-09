@@ -1,10 +1,10 @@
-<table class="w-full text-left text-sm">
+<div class="mt-4 overflow-x-auto rounded-xl border border-slate-200">
+    <table class="w-full text-left text-sm mb-6">
     <thead class="bg-slate-900 text-xs uppercase tracking-wider text-white">
       <tr>
         <th class="px-4 py-3">Producto</th>
         <th class="px-4 py-3">Precio</th>
         <th class="px-4 py-3">Cantidad</th>
-        <th class="px-4 py-3">Subtotal</th>
         <th class="px-4 py-3">Acciones</th>
       </tr>
     </thead>
@@ -16,13 +16,11 @@
           <td class="px-4 py-3 font-semibold text-slate-900">{{ l.nombre }}</td>
           <td class="px-4 py-3 text-slate-600">{{ l.precio | currency: 'COP' : 'symbol-narrow' : '1.0-0'}}</td>
           <td class="px-4 py-3 text-slate-600">{{ l.cantidad }}</td>
-          <td class="px-4 py-3 font-semibold text-slate-900">
-            {{ l.precio * l.cantidad | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
-          </td>
           <td class="px-4 py-3">
             <button
               type="button"
               class="rounded-md bg-amber-400 px-3 py-1 text-xs font-bold text-slate-900 disabled:opacity-30" 
+              (click)="quitar.emit(l.nombre)"
             >
               Quitar
             </button>
@@ -36,4 +34,21 @@
         </tr>
       }
     </tbody>
-  </table>
+</table>
+</div>
+
+
+  <div class="mt-4 grid gap-3 sm:grid-cols-3">
+  <div class="rounded-xl bg-slate-900 px-5 py-4 text-white">
+    <div class="text-xs uppercase tracking-widest text-amber-400">Total Del Pedido</div>
+    <div class="mt-1 text-3xl font-bold">{{ total() | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</div>
+  </div>
+  <div class="rounded-xl bg-slate-100 px-5 py-4">
+    <div class="text-xs uppercase tracking-widest text-slate-500">Sub Total</div>
+    <div class="mt-1 text-3xl font-bold text-slate-900">{{ subTotal() | currency: 'COP' : 'symbol-narrow' : '1.0-0'  }}</div>
+  </div>
+  <div class="rounded-xl bg-slate-100 px-5 py-4">
+    <div class="text-xs uppercase tracking-widest text-slate-500">Domicilio</div>
+    <div class="mt-1 text-3xl font-bold text-slate-900">{{ domicilio()  }}</div>
+  </div>
+</div>

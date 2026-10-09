@@ -6,10 +6,7 @@
     background: #fff; 
 }
 
-.destacada { 
-    border: 2px solid #f59e0b; 
-    background: #fffbeb; 
-}
+
 
 h5 { 
     font-weight: 700; 
@@ -23,12 +20,10 @@ h5 {
 }
 
 .etq { 
-    display: inline-block; 
-    margin-top: .3rem; 
+    background: #d1fae5; 
+    color: #065f46;
     border-radius: 999px; 
-    background: #fee2e2; 
-    color: #991b1b; 
-    padding: .05rem .5rem; 
-    font-size: .7rem; 
-    font-weight: 700; 
+    padding: .1rem .6rem; 
+    font-size: .72rem; 
+    font-weight: 700;
 }
