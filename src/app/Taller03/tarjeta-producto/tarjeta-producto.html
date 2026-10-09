@@ -1,0 +1,14 @@
+<article class="tarjeta mt-6">
+      <h5>{{ producto().nombre }}</h5>
+      
+      <p class="precio">{{ producto().precio | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</p>
+      
+      <span class="etq">Disponibles: {{ n() }}</span>
+
+      <button type="button"
+        class="ml-1 mt-6 rounded-md bg-slate-800 px-3 py-1 text-xs font-bold text-white disabled:opacity-30"
+        [disabled]="disabled()"
+        (click)="agregar.emit(producto().nombre)">
+              Agregar
+        </button>
+</article>

@@ -1,0 +1,39 @@
+<table class="w-full text-left text-sm">
+    <thead class="bg-slate-900 text-xs uppercase tracking-wider text-white">
+      <tr>
+        <th class="px-4 py-3">Producto</th>
+        <th class="px-4 py-3">Precio</th>
+        <th class="px-4 py-3">Cantidad</th>
+        <th class="px-4 py-3">Subtotal</th>
+        <th class="px-4 py-3">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for ( l of linea(); track l.nombre) {  
+        <tr
+          class="border-t border-slate-100"
+        >
+          <td class="px-4 py-3 font-semibold text-slate-900">{{ l.nombre }}</td>
+          <td class="px-4 py-3 text-slate-600">{{ l.precio | currency: 'COP' : 'symbol-narrow' : '1.0-0'}}</td>
+          <td class="px-4 py-3 text-slate-600">{{ l.cantidad }}</td>
+          <td class="px-4 py-3 font-semibold text-slate-900">
+            {{ l.precio * l.cantidad | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
+          </td>
+          <td class="px-4 py-3">
+            <button
+              type="button"
+              class="rounded-md bg-amber-400 px-3 py-1 text-xs font-bold text-slate-900 disabled:opacity-30" 
+            >
+              Quitar
+            </button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="5" class="px-4 py-8 text-center text-slate-400">
+            El pedido está vacío
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
