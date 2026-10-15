@@ -1,0 +1,20 @@
+<article class="tarjeta mt-6">
+      <h5>{{ visible().nombre }}</h5>
+      <p class="precio"> {{visible().existencias}}</p>
+      <p class="precio">{{ visible().precio | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</p>
+      
+      @switch (visible().estado) {
+              @case('disponible') {<span class="etq verde">Disponible</span>}
+              @case('bajo')       {<span class="etq amarillo">Bajo</span>}
+              @default            {<span class="etq rojo">Agotado</span>}
+        }
+
+      
+
+      <button type="button"
+        class="ml-1 mt-6 rounded-md bg-slate-800 px-3 py-1 text-xs font-bold text-white disabled:opacity-30"
+        [disabled]="disabled()"
+        (click)="retirar.emit(producto().nombre)">
+              Retirar 1
+        </button>
+</article>
