@@ -30,7 +30,7 @@ export class Pedido {
     this.productos.update((lista) =>
       lista.map((p) => 
       p.nombre === nombre && p.existencias > 0 
-        ? {...p, existencias: p.existencias -1} : p
+        ? {...p, existencias: p.existencias - 1} : p
       ),
     );
     this.pedido.update((lista) => {
